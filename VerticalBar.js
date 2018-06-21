@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, Easing, View } from 'react-native';
 
-const INDETERMINATE_WIDTH_FACTOR = 0.3;
-const BAR_WIDTH_ZERO_POSITION =
-  INDETERMINATE_WIDTH_FACTOR / (1 + INDETERMINATE_WIDTH_FACTOR);
+const INDETERMINATE_HEIGHT_FACTOR = 0.3;
+const BAR_HEIGHT_ZERO_POSITION =
+  INDETERMINATE_HEIGHT_FACTOR / (1 + INDETERMINATE_HEIGHT_FACTOR);
 
 export default class ProgressBar extends Component {
   static propTypes = {
@@ -47,9 +47,9 @@ export default class ProgressBar extends Component {
     this.state = {
       width: 0,
       progress: new Animated.Value(
-        props.indeterminate ? INDETERMINATE_WIDTH_FACTOR : progress
+        props.indeterminate ? INDETERMINATE_HEIGHT_FACTOR : progress
       ),
-      animationValue: new Animated.Value(BAR_WIDTH_ZERO_POSITION),
+      animationValue: new Animated.Value(BAR_HEIGHT_ZERO_POSITION),
     };
   }
 
@@ -65,7 +65,7 @@ export default class ProgressBar extends Component {
         this.animate();
       } else {
         Animated.spring(this.state.animationValue, {
-          toValue: BAR_WIDTH_ZERO_POSITION,
+          toValue: BAR_HEIGHT_ZERO_POSITION,
           useNativeDriver: props.useNativeDriver,
         }).start();
       }
@@ -75,7 +75,7 @@ export default class ProgressBar extends Component {
       props.progress !== this.props.progress
     ) {
       const progress = props.indeterminate
-        ? INDETERMINATE_WIDTH_FACTOR
+        ? INDETERMINATE_HEIGHT_FACTOR
         : Math.min(Math.max(props.progress, 0), 1);
 
       if (props.animated) {
@@ -141,17 +141,18 @@ export default class ProgressBar extends Component {
     const progressStyle = {
       backgroundColor: color,
       width,
+      height: innerHeight,
       transform: [
         {
           translateY: this.state.animationValue.interpolate({
             inputRange: [0, 1],
-            outputRange: [innerWidth * -INDETERMINATE_WIDTH_FACTOR, innerWidth],
+            outputRange: [innerHeight * -INDETERMINATE_HEIGHT_FACTOR, innerHeight],
           }),
         },
         {
           translateY: this.state.progress.interpolate({
             inputRange: [0, 1],
-            outputRange: [innerWidth / -2, 0],
+            outputRange: [innerHeight / -2, 0],
           }),
         },
         {
