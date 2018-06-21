@@ -309,6 +309,7 @@ declare module 'react-native-progress' {
   }
 
 	export class Bar extends React.Component<BarPropTypes> {}
+  export class VerticalBar extends React.Component<BarPropTypes> {}
 	export class Circle extends React.Component<CirclePropTypes> {}
 	export class Pie extends React.Component<PiePropTypes> {}
 	export class CircleSnail extends React.Component<CircleSnailPropTypes> {}

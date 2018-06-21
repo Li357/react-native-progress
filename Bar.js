@@ -145,13 +145,13 @@ export default class ProgressBar extends Component {
         {
           translateX: this.state.animationValue.interpolate({
             inputRange: [0, 1],
-            outputRange: [innerWidth * -INDETERMINATE_WIDTH_FACTOR, innerWidth],
+            outputRange: [innerHeight * -INDETERMINATE_WIDTH_FACTOR, innerHeight],
           }),
         },
         {
           translateX: this.state.progress.interpolate({
             inputRange: [0, 1],
-            outputRange: [innerWidth / -2, 0],
+            outputRange: [innerHeight / -2, 0],
           }),
         },
         {
